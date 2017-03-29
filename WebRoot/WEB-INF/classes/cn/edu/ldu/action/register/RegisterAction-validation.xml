@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE validators PUBLIC "-//OpenSymphony Group//XWork Validator 1.0.2//EN"
+	"http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
+
+
+<validators>
+	<field name="user.userName">
+		<field-validator type="requiredstring">
+			<message>必须输入名字</message>
+		</field-validator>
+		<field-validator type="regex">
+			<param name="expression"><![CDATA[(\w{2,10})]]></param>
+			<message>您输入的用户名只能是字母和数组，且长度必须在2到10之间</message>
+		</field-validator>
+	</field>
+	<field name="user.password">
+		<field-validator type="requiredstring">
+			<message>必须输入密码</message>
+		</field-validator>
+		<field-validator type="stringlength">
+            <!-- 为校验器指定参数实现不同的校验规则，minlength：最少长度 -->
+            <param name="minLength">2</param>
+            <message>密码长度不能少于2位</message>
+        </field-validator>
+	</field>
+	<field name="user.password1">
+        <field-validator type="fieldexpression">
+            <param name="expression"><![CDATA[user.password1==user.password]]></param>
+            <message>两次密码不一致</message>
+        </field-validator>
+    </field>
+	<field name="user.birth">
+		<field-validator type="date">
+			<param name="min">1900-01-01</param>
+			<param name="max">2050-02-21</param>
+			<message>年纪必须在${min}到${max}之间</message>
+		</field-validator>
+	</field>
+	<field name="user.location">
+		<field-validator type="requiredstring">
+			<message>必须输入地址</message>
+		</field-validator>
+	</field>
+	<field name="user.email">
+		<!-- type值为校验器名，requiredstring：非空字符串校验器 -->
+        <field-validator type="requiredstring">
+            <message>邮箱不能为空</message>
+        </field-validator>
+        <!-- 一个字段可以配置多个校验器，email：校验邮箱格式 -->
+        <field-validator type="email">
+            <message>邮箱格式不正确</message>
+        </field-validator>
+	</field>
+</validators>

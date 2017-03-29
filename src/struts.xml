@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="default" extends="struts-default" namespace="/">
+		<default-action-ref name="error"></default-action-ref>
+		<action name="registerAction" class="cn.edu.ldu.action.register.RegisterAction">
+			<result name="success">/login/login.jsp</result>
+			<result name="input">/register/register.jsp</result>
+		</action>
+		<action name="loginAction" class="cn.edu.ldu.action.login.LoginAction">
+			<result name="success">/main/main.jsp</result>
+			<result name="input">/login/login.jsp</result>
+		</action>
+		<action name="updateInfoAction" class="cn.edu.ldu.action.information.UpdateInfoAction">
+			<result name="success">/information/lookInfo.jsp</result>
+			<result name="input">/information/updateInfo.jsp</result>
+		</action>
+		<!-- 对好友操作的action如下 -->
+		<action name="lookFriInfoAction" class="cn.edu.ldu.action.friends.LookFriInfoAction">
+			<result name="success">/friends/lookFriInfo.jsp</result>
+		</action>
+		<action name="addFriInfoAction" class="cn.edu.ldu.action.friends.AddFriInfoAction">
+			<result name="success" type="chain">lookFriInfoAction</result>
+			<result name="input">/friends/addFriInfo.jsp</result>
+		</action>
+		<action name="findFriInfoAction" class="cn.edu.ldu.action.friends.FindFriInfoAction">
+			<result name="success">/friends/findFriInfo.jsp</result>
+			<result name="input" type="chain">lookFriInfoAction</result>
+			<result name="error" type="chain">lookFriInfoAction</result>
+		</action>
+		<action name="deleteFriInfoAction" class="cn.edu.ldu.action.friends.DeleteFriInfoAction">
+			<result name="success" type="chain">lookFriInfoAction</result>
+			<result name="error" type="chain">lookFriInfoAction</result>
+			<result name="input" type="chain">lookFriInfoAction</result>
+		</action>
+		<action name="getUpdateFriInfoAction" class="cn.edu.ldu.action.friends.GetUpdateFriInfoAction">
+			<result name="success">/friends/updateFriInfo.jsp</result>
+		</action>
+		<action name="updateFriInfoAction" class="cn.edu.ldu.action.friends.UpdateFriInfoAction">
+			<result name="success">/friends/updateFriInfo.jsp</result>
+			<result name="error" type="chain">lookFriInfoAction</result>
+			<result name="input" type="chain">lookFriInfoAction</result>
+		</action>
+		<!-- 日程管理的action如下 -->
+		<action name="lookSchAction" class="cn.edu.ldu.action.schedule.LookSchAction">
+			<result name="success">/schedule/lookSch.jsp</result>
+		</action>
+		<action name="addSchAction" class="cn.edu.ldu.action.schedule.AddSchAction">
+			<result name="success" type="chain">lookSchAction</result>
+			<result name="error">/schedule/addSch.jsp</result>
+			<result name="input">/schedule/addSch.jsp</result>
+		</action>
+		<action name="deleteSchAction" class="cn.edu.ldu.action.schedule.DeleteSchAction">
+			<result name="success" type="chain">lookSchAction</result>
+		</action>
+		<action name="getUpdateSchAction" class="cn.edu.ldu.action.schedule.GetUpdateSchAction">
+			<result name="success">/schedule/updateSch.jsp</result>
+		</action>
+		<action name="updateSchAction" class="cn.edu.ldu.action.schedule.UpdateSchAction">
+			<result name="success" type="chain">lookSchAction</result>
+		</action>
+		<!-- 文件管理如下的action -->
+		<action name="lookFilesInfoAction" class="cn.edu.ldu.action.file.LookFilesInfoAction">
+			<result name="success">/file/lookFilesInfo.jsp</result>
+		</action>
+		<action name="uploadFileAction" class="cn.edu.ldu.action.file.UploadFileAction">
+			<result name="success" type="chain">lookFilesInfoAction</result>
+			<result name="error">/file/uploadFile.jsp</result>
+		</action>
+		<action name="downFileAction" class="cn.edu.ldu.action.file.DownFileAction">
+			<result name="success" type="stream">
+				<param name="contentType">application/octet-stream;charset=UTF-8</param>  
+                <param name="contentDisposition">attachment;filename="${fileName}"</param>  
+                <param name="inputName">downloadFile</param>  
+                <param name="bufferSize">1024</param>  
+			</result>
+		</action>
+		<action name="deleteFileAction" class="cn.edu.ldu.action.file.DeleteFileAction">
+			<result name="success" type="chain">lookFilesInfoAction</result>
+		</action>
+		<action name="error">
+			<result>/error/error.jsp</result>
+		</action>
+	</package>
+</struts>    
